@@ -1,4 +1,3 @@
-
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -11,14 +10,15 @@ public:
             return ans;
         }
 
-        for (int i = 0; i < size; i++) {
+        for (int i = size-1; i >=0; i--) {
             int val1 = nums[i];
             int val2 = target - val1;
 
             auto val2It = find(nums.begin(), nums.end(), val2);
             int val2Index = val2It - nums.begin();
+            cout<<"val2Index"<<val2Index<<endl;
 
-            if ((val2Index != -1) && (i != val2Index)) {
+            if ((val2Index != size ) && (i != val2Index)) {
                 ans.push_back(i);
                 ans.push_back(val2Index);
                 return ans;
@@ -30,5 +30,3 @@ public:
         return ans;
     }
 };
-
-
