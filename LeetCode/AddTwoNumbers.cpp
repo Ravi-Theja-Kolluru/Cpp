@@ -11,11 +11,13 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int n1 = sizeof(l1);
-        int n2 = sizeof(l2);
+        int n1 = 0;
+        int n2 = 0;
         bool isN1Max = n1>n2;
         int max = isN1Max?n1:n2;
-        ListNode* answer = (ListNode*) malloc(max+1);
+        // ListNode* answer = (ListNode*) malloc(max+1);
+        
+        ListNode answer;
 
         
         ListNode head1 = *l1;
@@ -26,23 +28,31 @@ public:
             head1.next = &prev1;
             prev1 = head1;
             head1 = next1;
+            n1++;
         }
+        head1 = prev1;
         
         ListNode head2 = *l2;
         ListNode prev2;
         ListNode next2;
-        while(head2.next != nullptr){
+        while(head2.next != nullptr) {
             next2 = *head2.next;
             head2.next = &prev2;
             prev2 = head2;
             head2 = next2;
+            n2++;
+        }
+
+        // cout<<"n1"<<n1<<"n2"<<n2<<endl;
+        while(head1.next != nullptr){
+            cout<<head1.val<<endl;
         }
 
         int count, carry =0;
         bool isList1End = false;
         bool isList2End = false;
-        ListNode heada = *answer;
-        while(heada.next != nullptr){
+        ListNode heada = answer;
+        while(max != 0){
             int valueL1 =0;
             if(!isList1End){
                 valueL1 = head1.val;
@@ -61,6 +71,7 @@ public:
             heada.val = sum;
 
             heada = *heada.next;
+            cout<<"val"<<heada.val<<endl;
             //post
             if(head1.next != nullptr){
                 head1 = *head1.next;
@@ -73,10 +84,12 @@ public:
             } else {
                 isList2End = true;
             }
-            
+
+            max--;
         }
 
-        return answer;
+
+        return answer.next;
     }
 
 
